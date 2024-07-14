@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        title>t/title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="{% static 'blog/images/main.ico' %}" type="image/x-icon" />
+        <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Django wwwwwwwwwwww</a></h1>
+            <p class="admin">a href="admin/">Админ панель</a></p>
+            {% if user.is_authenticated %}
+                a href="{% url 'post_new' %}">Добавить пост</a>
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-info">Выход</button>
+                </form>
+
+            {% else %}
+                <a href="{% url 'login' %}">Вход</a>
+
+            {% endif %}
+
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
